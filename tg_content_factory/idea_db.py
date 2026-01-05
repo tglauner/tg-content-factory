@@ -6,7 +6,7 @@ from dataclasses import asdict
 from datetime import datetime
 from pathlib import Path
 
-from .models import Idea
+from .idea_models import Idea
 
 
 class IdeaRepository:

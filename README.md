@@ -21,6 +21,9 @@ git clone <YOUR_REPO_URL>
 cd tg-content-factory
 ```
 
+All commands below assume you're running from the repo root so the local
+`tg_content_factory` package is on the Python import path.
+
 ### 3) Create the required virtual environment
 > **Important:** The project expects the virtual environment folder to be `.venv/`.
 ```bash
@@ -28,13 +31,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### 4) Install the project in editable mode
-```bash
-python -m pip install --upgrade pip
-python -m pip install -e .
-```
-
-### 5) Configure OpenAI access
+### 4) Configure OpenAI access
 Create a local `.env` file (ignored by git) from the example and load it into your shell:
 ```bash
 cp .env.example .env
@@ -94,9 +91,9 @@ python
 ```
 
 ```python
-from src.db import IdeaRepository
-from src.idea_service import IdeaService
-from src.queue import AssetGenQueue
+from tg_content_factory.idea_db import IdeaRepository
+from tg_content_factory.idea_queue import AssetGenQueue
+from tg_content_factory.idea_service import IdeaService
 
 repo = IdeaRepository("data/ideas.db")
 service = IdeaService(repo, AssetGenQueue(repo))
@@ -120,3 +117,4 @@ print(ideas[0].title)
 ## Notes
 - SQLite is used locally for lightweight storage.
 - The `tests/` folder is intended to grow as regression coverage expands.
+- Deployment notes live in [`DEPLOY.md`](DEPLOY.md).

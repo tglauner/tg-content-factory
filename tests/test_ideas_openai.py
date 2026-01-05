@@ -11,7 +11,7 @@ class OpenAIIdeaTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             db_path = f"{tmpdir}/tg.db"
             env = os.environ.copy()
-            env["PYTHONPATH"] = str(Path.cwd() / "src")
+            env["PYTHONPATH"] = str(Path.cwd())
             env["OPENAI_API_KEY"] = "test-key"
             env["TG_OPENAI_MOCK"] = "1"
 

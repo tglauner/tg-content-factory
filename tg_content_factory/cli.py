@@ -4,7 +4,15 @@ import argparse
 import os
 from pathlib import Path
 
-from tg_content_factory import analytics, db, drafts, ideas, review, templates, venues
+from tg_content_factory import (
+    analytics,
+    content_db as db,
+    drafts,
+    ideas,
+    review,
+    templates,
+    venues,
+)
 
 DEFAULT_DB = str(Path("data") / "tg_content_factory.db")
 

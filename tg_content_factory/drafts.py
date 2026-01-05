@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
-from tg_content_factory import db, templates
+from tg_content_factory import content_db as db, templates
 from tg_content_factory.openai_client import OpenAIClient
 from tg_content_factory.video_renderer import VideoRenderer
 

@@ -1,6 +1,6 @@
 import unittest
 
-from src.scoring import score_idea
+from tg_content_factory.idea_scoring import score_idea
 
 
 class ScoreIdeaTests(unittest.TestCase):
