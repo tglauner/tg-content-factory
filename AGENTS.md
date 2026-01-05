@@ -1,3 +1,16 @@
+# Refactor Protocol (Codex)
+Goal: remove Cursor-era/legacy leftovers, align architecture + docs, minimal behavior change.
+
+Rules:
+- Start by producing an INVENTORY + FINDINGS report before changing code.
+- Prefer deletion over “keep but unused”. No legacy code should linger.
+- Any deletion must be justified with (a) grep/ripgrep references, (b) import graph / usage check, (c) build/test run.
+- Refactors must be minimal: no feature changes, no redesign, no new frameworks unless required.
+- After changes: update docs so they match reality (DEPLOY.md, README, comments, env examples).
+- Keep deploy behavior compatible with DigitalOcean droplet workflow (non-git-driven production).
+- Every commit must be small and titled: "audit:", "delete:", "refactor:", "docs:", "chore:".
+- Provide a final checklist of what was removed/changed and why.
+
 # AGENTS.md — tg-content-factory (Project)
 
 ## Non-negotiables
