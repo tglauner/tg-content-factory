@@ -12,6 +12,8 @@ from .data import (
 from .storage import LocalStorage, ObjectStorage, S3Storage, GCSStorage
 from .video_assembly import VideoAssembler
 from .metadata import MetadataStore
+from .openai_client import OpenAIClient
+from .video_renderer import VideoRenderer
 
 __all__ = [
     "AssetGenService",
@@ -27,4 +29,6 @@ __all__ = [
     "GCSStorage",
     "VideoAssembler",
     "MetadataStore",
+    "OpenAIClient",
+    "VideoRenderer",
 ]

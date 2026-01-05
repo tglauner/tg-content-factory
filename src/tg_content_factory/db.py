@@ -10,7 +10,9 @@ CREATE TABLE IF NOT EXISTS ideas (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     created_at TEXT NOT NULL,
     prompt TEXT NOT NULL,
-    status TEXT NOT NULL
+    status TEXT NOT NULL,
+    generated_by TEXT NOT NULL,
+    model TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS drafts (
@@ -18,6 +20,8 @@ CREATE TABLE IF NOT EXISTS drafts (
     idea_id INTEGER NOT NULL,
     template_name TEXT NOT NULL,
     content TEXT NOT NULL,
+    video_path TEXT,
+    preview_path TEXT,
     status TEXT NOT NULL,
     created_at TEXT NOT NULL,
     FOREIGN KEY (idea_id) REFERENCES ideas (id)

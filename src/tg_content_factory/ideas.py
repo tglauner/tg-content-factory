@@ -1,28 +1,33 @@
 from __future__ import annotations
 
-import random
 from datetime import datetime, timezone
+from typing import Optional
 
 from tg_content_factory import db
-
-TOPICS = [
-    "Build better habits with tiny experiments",
-    "Explain recursion with a real-world metaphor",
-    "How to map a lecture into a 60-second script",
-    "Turn a Q&A into an engaging clip",
-    "Designing slide decks for quick comprehension",
-]
+from tg_content_factory.openai_client import OpenAIClient
 
 
-def generate_ideas(db_path: str, count: int) -> list[int]:
+def generate_ideas(
+    db_path: str, count: int, client: Optional[OpenAIClient] = None
+) -> list[int]:
     db.init_db(db_path)
     created_ids: list[int] = []
+    openai_client = client or OpenAIClient.from_env()
+    prompts = openai_client.generate_ideas(count)
     with db.get_connection(db_path) as conn:
-        for _ in range(count):
-            prompt = random.choice(TOPICS)
+        for prompt in prompts:
             cursor = conn.execute(
-                "INSERT INTO ideas (created_at, prompt, status) VALUES (?, ?, ?)",
-                (datetime.now(timezone.utc).isoformat(), prompt, "new"),
+                """
+                INSERT INTO ideas (created_at, prompt, status, generated_by, model)
+                VALUES (?, ?, ?, ?, ?)
+                """,
+                (
+                    datetime.now(timezone.utc).isoformat(),
+                    prompt,
+                    "new",
+                    "openai",
+                    openai_client.model,
+                ),
             )
             created_ids.append(cursor.lastrowid)
     return created_ids
