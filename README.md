@@ -35,6 +35,12 @@ python -m pip install -e .
 ```
 
 ### 5) Configure OpenAI access
+Create a local `.env` file (ignored by git) from the example and load it into your shell:
+```bash
+cp .env.example .env
+source .env
+```
+
 Set your OpenAI API key (GPT-5.2 is the default model):
 ```bash
 export OPENAI_API_KEY="your-key-here"
