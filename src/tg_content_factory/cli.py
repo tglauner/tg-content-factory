@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 from pathlib import Path
 
 from tg_content_factory import analytics, db, drafts, ideas, review, templates, venues
@@ -11,6 +12,11 @@ DEFAULT_DB = str(Path("data") / "tg_content_factory.db")
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="tg-content-factory CLI")
     parser.add_argument("--db", default=DEFAULT_DB, help="Path to sqlite DB file")
+    parser.add_argument(
+        "--openai-key",
+        default=os.getenv("OPENAI_API_KEY", ""),
+        help="OpenAI API key (or set OPENAI_API_KEY)",
+    )
 
     subparsers = parser.add_subparsers(dest="command", required=True)
 
@@ -59,6 +65,11 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def _ensure_openai_key(api_key: str) -> None:
+    if not api_key:
+        raise SystemExit("OPENAI_API_KEY is required. Pass --openai-key or set env.")
+
+
 def main() -> None:
     parser = build_parser()
     args = parser.parse_args()
@@ -69,6 +80,8 @@ def main() -> None:
         return
 
     if args.command == "generate-ideas":
+        _ensure_openai_key(args.openai_key)
+        os.environ["OPENAI_API_KEY"] = args.openai_key
         idea_ids = ideas.generate_ideas(args.db, args.count)
         print(f"Generated ideas: {idea_ids}")
         return
@@ -79,6 +92,8 @@ def main() -> None:
         return
 
     if args.command == "create-drafts":
+        _ensure_openai_key(args.openai_key)
+        os.environ["OPENAI_API_KEY"] = args.openai_key
         draft_ids = drafts.create_drafts(args.db, args.idea_ids, args.templates)
         print(f"Created drafts: {draft_ids}")
         return
