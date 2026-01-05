@@ -2,9 +2,9 @@ import sqlite3
 import tempfile
 import unittest
 
-from src.db import IdeaRepository
-from src.idea_service import IdeaService
-from src.queue import AssetGenQueue
+from tg_content_factory.idea_db import IdeaRepository
+from tg_content_factory.idea_queue import AssetGenQueue
+from tg_content_factory.idea_service import IdeaService
 
 
 class IdeaServiceTests(unittest.TestCase):

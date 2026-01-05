@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from .db import IdeaRepository
-from .models import Idea
+from .idea_db import IdeaRepository
+from .idea_models import Idea
 
 
 class AssetGenQueue:

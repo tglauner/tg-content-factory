@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from tg_content_factory import db
+from tg_content_factory import content_db as db
 
 
 def set_review_status(db_path: str, draft_id: int, status: str) -> bool:

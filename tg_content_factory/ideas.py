@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Optional
 
-from tg_content_factory import db
+from tg_content_factory import content_db as db
 from tg_content_factory.openai_client import OpenAIClient
 
 

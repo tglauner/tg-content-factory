@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 
-from tg_content_factory import db
+from tg_content_factory import content_db as db
 
 
 def record_metrics(db_path: str, post_id: int, views: int, clicks: int) -> int:

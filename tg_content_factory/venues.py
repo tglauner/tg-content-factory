@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from uuid import uuid4
 
-from tg_content_factory import db
+from tg_content_factory import content_db as db
 
 DEFAULT_VENUES = ["youtube", "tiktok"]
 

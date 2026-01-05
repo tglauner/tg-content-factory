@@ -3,9 +3,9 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from src.db import IdeaRepository
-from src.idea_service import IdeaService
-from src.queue import AssetGenQueue
+from tg_content_factory.idea_db import IdeaRepository
+from tg_content_factory.idea_queue import AssetGenQueue
+from tg_content_factory.idea_service import IdeaService
 
 
 def load_config(config_path: Path) -> dict[str, list[str]]:
