@@ -17,6 +17,29 @@ from tg_content_factory import (
 DEFAULT_DB = str(Path("data") / "tg_content_factory.db")
 
 
+def _load_env_file(path: Path) -> None:
+    if not path.exists():
+        return
+    for raw_line in path.read_text().splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("export "):
+            line = line[len("export ") :].strip()
+        if "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip()
+        if not key:
+            continue
+        if (value.startswith('"') and value.endswith('"')) or (
+            value.startswith("'") and value.endswith("'")
+        ):
+            value = value[1:-1]
+        os.environ.setdefault(key, value)
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="tg-content-factory CLI")
     parser.add_argument("--db", default=DEFAULT_DB, help="Path to sqlite DB file")
@@ -79,6 +102,7 @@ def _ensure_openai_key(api_key: str) -> None:
 
 
 def main() -> None:
+    _load_env_file(Path(".env"))
     parser = build_parser()
     args = parser.parse_args()
 
