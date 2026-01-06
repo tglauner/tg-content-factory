@@ -10,7 +10,7 @@ The droplet runs the CLI and scripts directly from a checked-out working copy.
    python3 -m venv .venv
    source .venv/bin/activate
    ```
-3. Configure environment variables:
+3. Configure environment variables (the CLI reads `.env` automatically from the repo root):
    ```bash
    cp .env.example .env
    source .env

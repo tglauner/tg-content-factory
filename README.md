@@ -32,7 +32,8 @@ source .venv/bin/activate
 ```
 
 ### 4) Configure OpenAI access
-Create a local `.env` file (ignored by git) from the example and load it into your shell:
+Create a local `.env` file (ignored by git) from the example. The CLI reads `.env`
+from the repo root automatically, or you can load it into your shell:
 ```bash
 cp .env.example .env
 source .env
